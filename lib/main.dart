@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:shop_pakaian/dashboard.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_pakaian/cart_provider.dart';
+import 'package:shop_pakaian/login_page.dart';
+import 'package:shop_pakaian/navigation.dart';
+
 import 'package:shop_pakaian/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+      ],
+    child: MyApp()
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'shop pakaian',
+      title: 'Stone Island Store',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           background: Colors.white,
@@ -25,7 +36,7 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
-        Dashboard_page.routeName: (context) => Dashboard_page(),
+        LoginPage.routeName: (context) => LoginPage(),
       },
     );
   }
